@@ -28,3 +28,19 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/urfave/cli"
+  version = "1.21.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/zalando/go-keyring"
+
+[[constraint]]
+  name = "github.com/parnurzeal/gorequest"
+  version = "0.2.15"
+
+[[constraint]]
+  name = "github.com/blang/semver"
+  version = "3.6.1"

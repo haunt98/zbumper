@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/zpmbumper.iml" filepath="$PROJECT_DIR$/zpmbumper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zbumper.iml" filepath="$PROJECT_DIR$/zbumper.iml" />
     </modules>
   </component>
 </project>
