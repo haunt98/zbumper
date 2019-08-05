@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func promptAction(bump *Bump) error {
+func promptAction(bump *Bump, accessToken string) error {
 	i, _, err := (&promptui.Select{
 		Label: "What do you want?",
 		Items: []string{
@@ -22,7 +22,7 @@ func promptAction(bump *Bump) error {
 	case 0:
 		return doBumpRelease(bump)
 	case 1:
-		return doBuildAndPush(bump)
+		return doBuildAndPush(bump, accessToken)
 	default:
 		return errors.New("invalid case")
 	}
@@ -40,9 +40,13 @@ func doBumpRelease(bump *Bump) error {
 	return err
 }
 
-func doBuildAndPush(bump *Bump) error {
-	return ensureBump(bump)
-	// run docker
+func doBuildAndPush(bump *Bump, accessToken string) error {
+	if err := ensureBump(bump); err != nil {
+		return err
+	}
+	msg, err := buildAndDeployDocker(bump, accessToken)
+	log.Println(msg)
+	return err
 }
 
 func ensureBump(bump *Bump) error {

@@ -14,10 +14,10 @@ func main() {
 		}
 		accessToken, err = ensureAccessTokenAvailableAndValid()
 	}
-	//err := promptAction(bump)
-	//if err != nil {
-	//	log.Fatal(err)
-	//	return
-	//}
-	//log.Print(bump)
+	err = promptAction(bump, accessToken)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	log.Println("Yayyy!")
 }

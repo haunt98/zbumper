@@ -1,19 +1,23 @@
 package main
 
-import "os/exec"
+import (
+	"fmt"
+	"os/exec"
+	"strings"
+)
 
-func buildAndDeployDocker(b *Bump) (string, error) {
-	/*
-	image_tag=registry-gitlab.zalopay.vn/apps/zpm/backend/$1/$2:$3$now
-
-	docker build -t $image_tag -f $1/docker/Dockerfile_$2 . && docker login registry-gitlab.zalopay.vn && docker push $image_tag
-	 */
-	//imageTagLocation
-	//imageTag :=
-	//output, err := exec.Command(
-	//	"docker", "build", "-t", "$image_tag", "-f", "$1/docker/Dockerfile_$2", ".", "&&",
-	//	"docker", "login", "registry-gitlab.zalopay.vn", "&&",
-	//	"docker", "push", "$image_tag").
-	//	CombinedOutput()
-
+func buildAndDeployDocker(b *Bump, accessToken string) (string, error) {
+	repo, err := getGitlabRepository(b.Project, b.Service, accessToken)
+	if err != nil {
+		return "", err
+	}
+	imageTag := fmt.Sprintf("%s:v%s", repo.Location, b.Version)
+	dockerfileName := fmt.Sprintf("%s/docker/Dockerfile_%s", b.Project, b.Service)
+	dockerHost := strings.Split(repo.Location, "/")[0]
+	output, err := exec.Command(
+		"docker", "build", "-t", imageTag, "-f", dockerfileName, ".", "&&",
+		"docker", "login", dockerHost, "&&",
+		"docker", "push", imageTag).
+		CombinedOutput()
+	return string(output), err
 }
