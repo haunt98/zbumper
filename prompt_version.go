@@ -44,18 +44,6 @@ func promptInputVersionOrAccessToken(project, service string) (string, error) {
 	}
 }
 
-func promptAccessToken() error {
-	prompt := promptui.Prompt{
-		Label:    "Input you Gitlab access token",
-		Validate: validateAccessToken,
-	}
-	result, err := prompt.Run()
-	if err != nil {
-		return err
-	}
-	return saveAccessToken(result)
-}
-
 func promptInputVersionOrAutoVersion(project, service, accessToken string) (string, error) {
 	repo, err := getGitlabRepository(project, service, accessToken)
 	if err != nil {
