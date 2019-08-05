@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2dbdfe-7392-4257-8814-4a940afdc0ce" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/models.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prompt_action.go" beforeDir="false" afterPath="$PROJECT_DIR$/prompt_action.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompt_tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/prompt_version.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +173,7 @@
       <option name="presentableId" value="Default" />
       <updated>1564898003437</updated>
       <workItem from="1564898004825" duration="4396000" />
-      <workItem from="1564923054992" duration="17010000" />
+      <workItem from="1564923054992" duration="18142000" />
     </task>
     <servers />
   </component>

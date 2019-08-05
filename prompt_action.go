@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"github.com/manifoldco/promptui"
+	"log"
 )
 
 func promptAction(bump *Bump) error {
@@ -28,9 +29,15 @@ func promptAction(bump *Bump) error {
 }
 
 func doBumpRelease(bump *Bump) error {
-	// check if release branch
-	return ensureBump(bump)
-	// create commit and send
+	if err := ensureReleaseBranch(); err != nil {
+		return err
+	}
+	if err := ensureBump(bump); err != nil {
+		return err
+	}
+	msg, err := commitBump(bump)
+	log.Println(msg)
+	return err
 }
 
 func doBuildAndPush(bump *Bump) error {
