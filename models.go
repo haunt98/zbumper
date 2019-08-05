@@ -1,11 +1,18 @@
 package main
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Bump struct {
 	Project string
 	Service string
-	Tag     string
+	Version string
+}
+
+func (b *Bump) composeGitCommitMessage() string {
+	return fmt.Sprintf("bump(%s): %s - version v%s", b.Project, b.Service, b.Version)
 }
 
 type Repository struct {

@@ -28,11 +28,14 @@ func promptAction(bump *Bump) error {
 }
 
 func doBumpRelease(bump *Bump) error {
+	// check if release branch
 	return ensureBump(bump)
+	// create commit and send
 }
 
 func doBuildAndPush(bump *Bump) error {
 	return ensureBump(bump)
+	// run docker
 }
 
 func ensureBump(bump *Bump) error {
@@ -49,8 +52,8 @@ func ensureBump(bump *Bump) error {
 	if err != nil {
 		return err
 	}
-	if len(bump.Tag) == 0 {
-		bump.Tag, err = promptTag(bump.Project, bump.Service)
+	if len(bump.Version) == 0 {
+		bump.Version, err = promptVersion(bump.Project, bump.Service)
 	}
 	if err != nil {
 		return err

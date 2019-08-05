@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"github.com/blang/semver"
 	"github.com/manifoldco/promptui"
-	"log"
 	"regexp"
 )
 
 const semverRegEx = `^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?$`
 
-func promptTag(project, service string) (string, error) {
+func promptVersion(project, service string) (string, error) {
 	accessToken, err := ensureAccessTokenAvailableAndValid()
 	if err != nil {
 		return promptInputVersionOrAccessToken(project, service)
@@ -30,14 +29,14 @@ func promptInputVersionOrAccessToken(project, service string) (string, error) {
 		Validate: validateVersionInput,
 	}).Run()
 	if err != nil {
-		log.Panic(err)
+		return "", err
 	}
 	switch i {
 	case 0:
 		if err := promptAccessToken(); err != nil {
 			return "", err
 		}
-		return promptTag(project, service)
+		return promptVersion(project, service)
 	case -1:
 		return result, nil
 	default:
@@ -79,7 +78,7 @@ func promptForUserInputOnly() (string, error) {
 		Validate: validateVersionInput,
 	}).Run()
 	if err != nil {
-		log.Panic(err)
+		return "", err
 	}
 	switch i {
 	case -1:
@@ -125,7 +124,7 @@ func promptAsIfLatestVersionValid(latestVer *semver.Version) (string, error) {
 		Validate: validateVersionInput,
 	}).Run()
 	if err != nil {
-		log.Panic(err)
+		return "", err
 	}
 	switch i {
 	case 0:
