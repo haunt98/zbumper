@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-var dockerfilePrefix = "Dockerfile_"
-
 func promptServiceName(project string) (string, error) {
 	services, err := getServices(project)
 	if err != nil {

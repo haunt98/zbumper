@@ -10,9 +10,7 @@ import (
 func ensureReleaseBranch() error {
 	// git branch | grep \* | cut -d ' ' -f2
 	output, err := exec.
-		Command("git","branch",
-			"|","grep","\\*",
-			"|","cut","-d","'","'","-f2").CombinedOutput()
+		Command("bash", "-c", "git branch | grep \\* | cut -d ' ' -f2").CombinedOutput()
 	if err != nil {
 		return err
 	}
@@ -30,5 +28,8 @@ func commitBump(b *Bump) (string, error) {
 			"-m", b.composeGitCommitMessage(),
 			"--allow-empty").
 		CombinedOutput()
+	if err != nil {
+		err = errors.New("cannot commit bump: " + err.Error())
+	}
 	return string(output), err
 }

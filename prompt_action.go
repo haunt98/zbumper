@@ -20,9 +20,9 @@ func promptAction(bump *Bump, accessToken string) error {
 	}
 	switch i {
 	case 0:
-		return doBumpRelease(bump)
-	case 1:
 		return doBuildAndPush(bump, accessToken)
+	case 1:
+		return doBumpRelease(bump)
 	default:
 		return errors.New("invalid case")
 	}
