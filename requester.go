@@ -21,11 +21,11 @@ func getProjectID() string {
 }
 
 func getRepositoriesUrl() string {
-	return fmt.Sprintf("%s/api/v4/projects/%s/registry/repositories", getBaseUrl(), getProjectID())
+	return fmt.Sprintf("%s/api/v4/projects/%s/registry/repositories?per_page=1000", getBaseUrl(), getProjectID())
 }
 
 func getRepositoryTagsUrl(repositoryID uint64) string {
-	return fmt.Sprintf("%s/%d/tags", getRepositoriesUrl(), repositoryID)
+	return fmt.Sprintf("%s/%d/tags?per_page=1000", getRepositoriesUrl(), repositoryID)
 }
 
 func getRepositories(accessToken string) ([]*Repository, error) {
