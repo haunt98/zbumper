@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2e2dbdfe-7392-4257-8814-4a940afdc0ce" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getter_gitlab_tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/getter_gitlab_tag.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requester.go" beforeDir="false" afterPath="$PROJECT_DIR$/requester.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -175,7 +174,9 @@
       <updated>1564898003437</updated>
       <workItem from="1564898004825" duration="4396000" />
       <workItem from="1564923054992" duration="18142000" />
-      <workItem from="1565080362233" duration="1216000" />
+      <workItem from="1565080362233" duration="2396000" />
+      <workItem from="1565240175743" duration="8000" />
+      <workItem from="1565715708889" duration="489000" />
     </task>
     <servers />
   </component>

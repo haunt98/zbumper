@@ -21,16 +21,17 @@ func getProjectID() string {
 }
 
 func getRepositoriesUrl() string {
-	return fmt.Sprintf("%s/api/v4/projects/%s/registry/repositories?per_page=1000", getBaseUrl(), getProjectID())
+	return fmt.Sprintf("%s/api/v4/projects/%s/registry/repositories", getBaseUrl(), getProjectID())
 }
 
 func getRepositoryTagsUrl(repositoryID uint64) string {
-	return fmt.Sprintf("%s/%d/tags?per_page=1000", getRepositoriesUrl(), repositoryID)
+	return fmt.Sprintf("%s/%d/tags", getRepositoriesUrl(), repositoryID)
 }
 
 func getRepositories(accessToken string) ([]*Repository, error) {
 	var result []*Repository
 	rsp, _, err := gorequest.New().Get(getRepositoriesUrl()).
+		Query("per_page=1000").
 		Set(tokenHeader, accessToken).
 		EndStruct(&result)
 	if len(err) != 0 {
@@ -45,6 +46,7 @@ func getRepositories(accessToken string) ([]*Repository, error) {
 func getRepositoryTags(repositoryID uint64, accessToken string) ([]*Tag, error) {
 	var result []*Tag
 	rsp, _, err := gorequest.New().Get(getRepositoryTagsUrl(repositoryID)).
+		Query("per_page=1000").
 		Set(tokenHeader, accessToken).
 		EndStruct(&result)
 	if len(err) != 0 {
