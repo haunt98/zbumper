@@ -19,5 +19,5 @@ func main() {
 		log.Println(err.Error())
 		return
 	}
-	log.Println("Yayyy!")
+	log.Println("yayyy!")
 }

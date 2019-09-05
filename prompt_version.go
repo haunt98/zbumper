@@ -81,46 +81,47 @@ func promptAsIfLatestVersionValid(latestVer *semver.Version) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if err := patchVer.IncrementPatch(); err != nil {
-		return "", err
-	}
-
 	minorVer, err := semver.Make(latestVer.String())
 	if err != nil {
 		return "", err
 	}
-	if err := minorVer.IncrementMinor(); err != nil {
-		return "", err
-	}
-
 	majorVer, err := semver.Make(latestVer.String())
 	if err != nil {
 		return "", err
 	}
-	if err := majorVer.IncrementMajor(); err != nil {
-		return "", err
+
+	optionTexts := make([]string, 0)
+	results := make([]string, 0)
+
+	if patchVer.IncrementPatch() == nil {
+		optionTexts = append(optionTexts, fmt.Sprintf("%s - increase patch", patchVer.String()))
+		results = append(results, patchVer.String())
+	}
+	if minorVer.IncrementMinor() == nil {
+		optionTexts = append(optionTexts, fmt.Sprintf("%s - increase minor", minorVer.String()))
+		results = append(results, minorVer.String())
+	}
+	if majorVer.IncrementMajor() == nil {
+		optionTexts = append(optionTexts, fmt.Sprintf("%s - increase major", majorVer.String()))
+		results = append(results, majorVer.String())
 	}
 
+	addLabel := "Use my own input"
+	if len(optionTexts) == 0 {
+		addLabel = fmt.Sprintf("Use my own input (lastest is %s)", latestVer.String())
+	}
 	i, result, err := (&promptui.SelectWithAdd{
 		Label: fmt.Sprintf("%s is the latest, what is the new one?", latestVer.String()),
-		Items: []string{
-			fmt.Sprintf("%s - increase patch", patchVer.String()),
-			fmt.Sprintf("%s - increase minor", minorVer.String()),
-			fmt.Sprintf("%s - increase major", majorVer.String()),
-		},
-		AddLabel: "Use my own input",
+		Items: optionTexts,
+		AddLabel: addLabel,
 		Validate: validateVersionInput,
 	}).Run()
 	if err != nil {
 		return "", err
 	}
 	switch i {
-	case 0:
-		return patchVer.String(), nil
-	case 1:
-		return minorVer.String(), nil
-	case 2:
-		return majorVer.String(), nil
+	case 0, 1, 2:
+		return results[i], nil
 	case -1:
 		return result, nil
 	default:
