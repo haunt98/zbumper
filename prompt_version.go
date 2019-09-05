@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/blang/semver"
 	"github.com/manifoldco/promptui"
+	"log"
 	"regexp"
 )
 
@@ -47,7 +48,8 @@ func promptInputVersionOrAccessToken(project, service string) (string, error) {
 func promptInputVersionOrAutoVersion(project, service, accessToken string) (string, error) {
 	repo, err := getGitlabRepository(project, service, accessToken)
 	if err != nil {
-		return "", err
+		log.Println("get from gitlab error:", err)
+		return promptForUserInputOnly()
 	}
 	latestVer, err := getLatestVersion(repo.ID, accessToken)
 	if err != nil {
